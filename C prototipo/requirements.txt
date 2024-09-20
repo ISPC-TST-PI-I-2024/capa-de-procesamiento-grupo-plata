@@ -7,5 +7,5 @@ mysql-connector-python
 ## ETAPA 2 ##
 
 Flask-SQLAlchemy
-flask-API
+flas
 flask-restful
