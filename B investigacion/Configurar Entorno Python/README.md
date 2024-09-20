@@ -84,3 +84,51 @@ Conexión con la API:
 
 Al ejecutar el script, deberías ver una respuesta JSON formateada en la terminal, lo que indica que la conexión con la API fue exitosa.
 
+# Explicación del Entorno Virtual (venv)
+
+Este proyecto utiliza un entorno virtual de Python (`venv`) para aislar y gestionar las dependencias y librerías necesarias para su correcto funcionamiento. A continuación, se describe la estructura y el propósito de los archivos y carpetas que componen el entorno virtual.
+
+## ¿Qué es un entorno virtual?
+
+Un entorno virtual en Python es un espacio aislado donde se pueden instalar librerías y dependencias sin afectar el entorno de Python instalado globalmente en el sistema. Esto permite tener diferentes proyectos con distintas versiones de librerías y paquetes sin que entren en conflicto entre sí.
+
+## Estructura del entorno virtual
+
+Cuando creas un entorno virtual utilizando `python -m venv <nombre-del-entorno>`, se genera una carpeta llamada `venv` (o el nombre que hayas elegido). Esta carpeta contiene varios archivos y directorios importantes:
+
+### 1. `venv/Include`
+
+Este directorio contiene los archivos de cabecera (headers) de Python que pueden ser necesarios si se quieren compilar extensiones de Python. Aunque es menos común que se utilicen directamente, son importantes cuando instalas librerías que requieren compilación adicional.
+
+### 2. `venv/Lib`
+
+Aquí es donde se almacenan todas las librerías y dependencias que instalas dentro del entorno virtual. Por ejemplo, si instalas la librería `requests` con el comando `pip install requests`, esta librería se ubicará dentro de este directorio. Es importante señalar que estas librerías solo están disponibles dentro de este entorno virtual y no afectan las librerías instaladas a nivel global en tu sistema.
+
+### 3. `venv/Scripts` (Windows) o `venv/bin` (Linux/Mac)
+
+Este directorio contiene los ejecutables que permiten activar y utilizar el entorno virtual. En Windows, por ejemplo, el archivo `activate` está dentro de esta carpeta, y al ejecutarlo (con el comando `.\Scripts\activate`), el entorno virtual se activa.
+
+Además, también contiene el intérprete de Python específico del entorno virtual. Cada entorno virtual tiene su propio intérprete de Python que ejecuta los scripts y comandos mientras el entorno está activo.
+
+### 4. `pyvenv.cfg`
+
+Este archivo es una configuración interna del entorno virtual. Contiene información sobre la versión de Python utilizada y las opciones con las que fue creado el entorno virtual. Por lo general, no necesitas modificar este archivo.
+
+## ¿Por qué usar un entorno virtual?
+
+- **Aislamiento**: Cada proyecto puede tener sus propias dependencias y versiones de paquetes, lo que evita conflictos entre proyectos.
+- **Gestión de dependencias**: Puedes instalar exactamente las librerías que necesitas sin afectar otros proyectos.
+- **Compatibilidad**: Aseguras que el entorno sea consistente en diferentes entornos de desarrollo o producción.
+
+## ¿Cómo activar el entorno virtual?
+
+1. **En Windows**: Ejecuta el siguiente comando en la terminal desde la carpeta donde está ubicado el entorno virtual:
+   ```
+   .\venv\Scripts\activate
+
+## ¿Cómo desactivar el entorno virtual?  
+
+Para desactivar el entorno virtual, solo debes ejecutar el comando:
+
+``` 
+ deactivate
