@@ -23,212 +23,59 @@ Maneja la creación y modificación de proyectos, asociando a los usuarios y dis
 Administra los permisos de acceso de los usuarios a los dispositivos, asegurando que cada usuario tenga los permisos adecuados.
 
 
-## MODULO 1 ##
-# Usuarios #
 
-Obtener Usuarios 
-Método: GET
-URL: /usuarios/
-Descripción: Obtiene una lista de todos los usuarios.
-Respuesta: Lista de usuarios con id, nombre, y email.
-Obtener Usuario
+---------------------------------------------------------MODULOS--------------------------------------------------------------------------- 
 
-Método: GET
-URL: /usuarios/<int:id>
-Descripción: Obtiene los detalles de un usuario específico por id.
-Respuesta: Datos del usuario correspondiente.
-Crear Usuario
+## Configuraciones ##
+Archivo: configuraciones.py
+Descripción: Este módulo maneja las operaciones CRUD para las configuraciones de los dispositivos IoT.
+• GET /configuraciones/: Obtiene todas las configuraciones.
+• GET /configuraciones/int:id: Obtiene una configuración específica por ID.
+• POST /configuraciones/: Crea una nueva configuración.
+• PUT /configuraciones/int:id: Actualiza una configuración existente por ID.
+• DELETE /configuraciones/int:id: Elimina una configuración por ID.
 
-Método: POST
-URL: /usuarios/
-Descripción: Crea un nuevo usuario.
-Cuerpo: nombre, email, rol, password.
-Respuesta: 201 Created.
-Actualizar Usuario
+## Datos Dispositivos ##
+Archivo: datos_dispositivos.py
+Descripción: Este módulo maneja las operaciones CRUD para los datos recolectados por los dispositivos IoT.
+• GET /datos_dispositivos/: Obtiene todos los datos de dispositivos.
+• GET /datos_dispositivos/int:id: Obtiene un dato específico por ID.
+• POST /datos_dispositivos/: Crea un nuevo dato de dispositivo.
+• PUT /datos_dispositivos/int:id: Actualiza un dato de dispositivo existente por ID.
+• DELETE /datos_dispositivos/int:id: Elimina un dato de dispositivo por ID.
 
-Método: PUT
-URL: /usuarios/<int:id>
-Descripción: Actualiza los datos de un usuario existente.
-Cuerpo: nombre, email, rol, password.
-Respuesta: 204 No Content.
-Borrar Usuario
+## Dispositivos ##
+Archivo: dispositivos.py
+Descripción: Este módulo maneja las operaciones CRUD para los dispositivos IoT.
+• GET /dispositivos/: Obtiene todos los dispositivos.
+• GET /dispositivos/int:id: Obtiene un dispositivo específico por ID.
+• POST /dispositivos/: Crea un nuevo dispositivo.
+• PUT /dispositivos/int:id: Actualiza un dispositivo existente por ID.
+• DELETE /dispositivos/int:id: Elimina un dispositivo por ID.
 
-Método: DELETE
-URL: /usuarios/<int:id>
-Descripción: Elimina un usuario.
-Respuesta: 204 No Content.
+## Proyectos ##
+Archivo: proyectos.py
+Descripción: Este módulo maneja las operaciones CRUD para los proyectos de IoT.
+• GET /proyectos/: Obtiene todos los proyectos.
+• GET /proyectos/int:id: Obtiene un proyecto específico por ID.
+• POST /proyectos/: Crea un nuevo proyecto.
+• PUT /proyectos/int:id: Actualiza un proyecto existente por ID.
+• DELETE /proyectos/int:id: Elimina un proyecto por ID.
 
-## MODULO 2 ##
-# Dispositivos #
+## Seguridad ##
+Archivo: seguridad.py
+Descripción: Este módulo maneja las operaciones CRUD para la gestión de seguridad.
+• GET /seguridad/: Obtiene todos los registros de seguridad.
+• GET /seguridad/int:id: Obtiene un registro de seguridad específico por ID.
+• POST /seguridad/: Crea un nuevo registro de seguridad.
+• PUT /seguridad/int:id: Actualiza un registro de seguridad existente por ID.
+• DELETE /seguridad/int:id: Elimina un registro de seguridad por ID.
 
-Obtener Dispositivos 
-Método: GET
-URL: /dispositivos/
-Descripción: Obtiene una lista de todos los dispositivos.
-Respuesta: Lista de dispositivos con id, nombre, tipo, ubicacion, y id_usuario.
-Obtener Dispositivo
-
-Método: GET
-URL: /dispositivos/<int:id>
-Descripción: Obtiene los detalles de un dispositivo específico por id.
-Respuesta: Datos del dispositivo correspondiente.
-Crear Dispositivo
-
-Método: POST
-URL: /dispositivos/
-Descripción: Crea un nuevo dispositivo.
-Cuerpo: nombre, tipo, ubicacion, id_usuario.
-Respuesta: 201 Created.
-Actualizar Dispositivo
-
-Método: PUT
-URL: /dispositivos/<int:id>
-Descripción: Actualiza un dispositivo existente.
-Cuerpo: nombre, tipo, ubicacion, id_usuario.
-Respuesta: 204 No Content.
-Borrar Dispositivo
-
-Método: DELETE
-URL: /dispositivos/<int:id>
-Descripción: Elimina un dispositivo.
-Respuesta: 204 No Content.
-
-## modulo 3 ##
-# Datos de Dispositivos #
-
-Obtener Datos de Dispositivos
-Método: GET
-URL: /datos_dispositivos/
-Descripción: Obtiene una lista de datos registrados para dispositivos.
-Respuesta: Lista de datos con id, dispositivo_id, timestamp, valor, y unidad.
-Obtener Dato de Dispositivo
-
-Método: GET
-URL: /datos_dispositivos/<int:id>
-Descripción: Obtiene los datos de un dispositivo específico por id.
-Respuesta: Datos correspondientes.
-Enviar Datos de Dispositivo
-
-Método: POST
-URL: /datos_dispositivos/
-Descripción: Envía nuevos datos para un dispositivo.
-Cuerpo: dispositivo_id, valor, unidad.
-Respuesta: 201 Created.
-Actualizar Dato de Dispositivo
-
-Método: PUT
-URL: /datos_dispositivos/<int:id>
-Descripción: Actualiza un dato existente para un dispositivo.
-Cuerpo: dispositivo_id, valor, unidad.
-Respuesta: 204 No Content.
-Borrar Dato de Dispositivo
-
-Método: DELETE
-URL: /datos_dispositivos/<int:id>
-Descripción: Elimina un dato específico para un dispositivo.
-Respuesta: 204 No Content.
-
-## MODULO 4 ##
-# Configuraciones #
-
-Obtener Configuraciones 
-Método: GET
-URL: /configuraciones/
-Descripción: Obtiene una lista de todas las configuraciones.
-Respuesta: Lista de configuraciones con id_configuracion, id_dispositivo, parametro, y valor.
-Obtener Configuración
-
-Método: GET
-URL: /configuraciones/<int:id>
-Descripción: Obtiene una configuración específica por id.
-Respuesta: Datos de configuración correspondientes.
-Enviar Configuración
-
-Método: POST
-URL: /configuraciones/
-Descripción: Envía una nueva configuración.
-Cuerpo: id_dispositivo, parametro, valor.
-Respuesta: 201 Created.
-Actualizar Configuración
-
-Método: PUT
-URL: /configuraciones/<int:id>
-Descripción: Actualiza una configuración existente.
-Cuerpo: id_dispositivo, parametro, valor.
-Respuesta: 204 No Content.
-Borrar Configuración
-
-Método: DELETE
-URL: /configuraciones/<int:id>
-Descripción: Elimina una configuración.
-Respuesta: 204 No Content.
-
-## MODULO 5 ##
-# Proyectos #
-
-Obtener Proyectos 
-Método: GET
-URL: /proyectos/
-Descripción: Obtiene una lista de todos los proyectos.
-Respuesta: Lista de proyectos con id_proyecto, nombre, descripcion, id_usuario, fecha_inicio, y fecha_fin.
-Obtener Proyecto
-
-Método: GET
-URL: /proyectos/<int:id>
-Descripción: Obtiene un proyecto específico por id.
-Respuesta: Datos del proyecto correspondiente.
-Enviar Proyecto
-
-Método: POST
-URL: /proyectos/
-Descripción: Envía un nuevo proyecto.
-Cuerpo: nombre, descripcion, id_usuario, fecha_inicio, fecha_fin.
-Respuesta: 201 Created.
-Actualizar Proyecto
-
-Método: PUT
-URL: /proyectos/<int:id>
-Descripción: Actualiza un proyecto existente.
-Cuerpo: nombre, descripcion, id_usuario, fecha_inicio, fecha_fin.
-Respuesta: 204 No Content.
-Borrar Proyecto
-
-Método: DELETE
-URL: /proyectos/<int:id>
-Descripción: Elimina un proyecto específico por id.
-Respuesta: 204 No Content.
-
-## MODULO 6 ##
-# Seguridad #
-
-Obtener Información de Seguridad 
-Método: GET
-URL: /seguridad/
-Descripción: Obtiene una lista de entradas de seguridad.
-Respuesta: Lista de entradas con id_seguridad, id_usuario, id_dispositivo, y permisos.
-Obtener Registro de Seguridad
-
-Método: GET
-URL: /seguridad/<int:id>
-Descripción: Obtiene un registro de seguridad específico.
-Respuesta: Datos del registro correspondiente.
-Enviar Registro de Seguridad
-
-Método: POST
-URL: /seguridad/
-Descripción: Envía una nueva entrada de seguridad.
-Cuerpo: id_usuario, id_dispositivo, permisos.
-Respuesta: 201 Created.
-Actualizar Registro de Seguridad
-
-Método: PUT
-URL: /seguridad/<int:id>
-Descripción: Actualiza una entrada de seguridad existente.
-Cuerpo: id_usuario, id_dispositivo, permisos.
-Respuesta: 204 No Content.
-Borrar Registro de Seguridad
-
-Método: DELETE
-URL: /seguridad/<int:id>
-Descripción: Elimina una entrada de seguridad.
-Respuesta: 204 No Content.
+## Usuarios ##
+Archivo: usuarios.py
+Descripción: Este módulo maneja las operaciones CRUD para los usuarios del sistema IoT.
+• GET /usuarios/: Obtiene todos los usuarios.
+• GET /usuarios/int:id: Obtiene un usuario específico por ID.
+• POST /usuarios/: Crea un nuevo usuario.
+• PUT /usuarios/int:id: Actualiza un usuario existente por ID.
+• DELETE /usuarios/int:id: Elimina un usuario por ID.
