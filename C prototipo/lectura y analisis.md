@@ -92,9 +92,11 @@ Método: DELETE
 URL: /dispositivos/<int:id>
 Descripción: Elimina un dispositivo.
 Respuesta: 204 No Content.
-Datos de Dispositivos
-Obtener Datos de Dispositivos
 
+## modulo 3 ##
+# Datos de Dispositivos #
+
+Obtener Datos de Dispositivos
 Método: GET
 URL: /datos_dispositivos/
 Descripción: Obtiene una lista de datos registrados para dispositivos.
