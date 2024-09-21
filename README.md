@@ -211,17 +211,10 @@ Este proyecto espera lograr:
 
 La **Capa de Procesamiento** en este proyecto a nivel ciudad es clave para manejar la recolección y el análisis de grandes volúmenes de datos provenientes de múltiples sensores distribuidos en distintas zonas urbanas. Al implementar un middleware robusto y optimizar la infraestructura cloud, se garantiza que el sistema pueda escalar y procesar los datos en tiempo real, ayudando a mejorar la calidad del aire y el bienestar de los ciudadanos.
 
-## Contribuciones
+## Licencia
 
-Este proyecto es colaborativo y está abierto a contribuciones. Si deseas participar, sigue las instrucciones en el archivo CONTRIBUTING.md.
+Este proyecto está licenciado bajo la Licencia Creative Commons Atribución-NoComercial (CC BY-NC). Esta licencia permite que otros remixen, adapten y construyan sobre el trabajo de forma no comercial y, aunque sus nuevos trabajos deben también reconocer al autor original y ser no comerciales, no tienen que licenciar sus obras derivadas en los mismos términos.
 
-Licencia
-Este proyecto está licenciado bajo la MIT License.
+Esta licencia es adecuada para un uso educativo y de aprendizaje, permitiendo la libre distribución y utilización del material mientras se protege contra el uso comercial sin autorización previa. Para usos comerciales, es necesario contactar a los autores para obtener permiso.
 
-
-### Ajustes hechos:
-1. **Enfoque a nivel ciudad**: El proyecto ahora está contextualizado para un despliegue urbano, con múltiples sensores distribuidos en diferentes ubicaciones de la ciudad.
-2. **Automatización y monitoreo a gran escala**: Se detalla cómo el sistema procesa los datos en tiempo real para impactar directamente en la gestión de la calidad del aire a nivel metropolitano.
-3. **Escalabilidad del sistema**: Se resaltan las ventajas de integrar plataformas cloud para manejar el creciente volumen de datos y sensores en toda la ciudad.
-
-Este README debería ser adecuado para comprender el alcance urbano del proyecto y cómo se gestiona la capa de procesamiento en este contexto.
+Para obtener más información sobre esta licencia y ver una copia completa de sus términos, visite [Creative Commons Atribución-NoComercial (CC BY-NC)](https://creativecommons.org/licenses/by-nc/4.0/).
