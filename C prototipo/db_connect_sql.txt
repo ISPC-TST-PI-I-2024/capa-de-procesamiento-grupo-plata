@@ -7,7 +7,7 @@ app = Flask(__name__)
 def get_db_connection():
     if 'db' not in g:
         g.db = mysql.connector.connect(
-            host="gonaiot.com", 
+            host="localhost", 
             user="root",   
             password="root",  
             database="my_api_restful"            
