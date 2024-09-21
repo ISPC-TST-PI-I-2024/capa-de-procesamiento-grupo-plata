@@ -5,7 +5,7 @@ El siguiente es un resumen a modo de ejemplo para e manejo de una API RESTful co
   
 # Estructura General
 ```python
-Copiar código
+
 import requests
 
 # Base URL de la API
@@ -19,7 +19,8 @@ HEADERS = {
 }  
 ```
 ## 1. GET: Obtener todos los recursos de un endpoint
-```python
+```python  
+
 def get_all(endpoint):
     url = BASE_URL.format(endpoint=endpoint)
     response = requests.get(url, headers=HEADERS)
@@ -35,7 +36,7 @@ get_all("dispositivos")
 
 ## 2. GET: Obtener un recurso por ID
 ```python
-Copiar código
+
 def get_by_id(endpoint, resource_id):
     url = f"{BASE_URL.format(endpoint=endpoint)}{resource_id}"
     response = requests.get(url, headers=HEADERS)
@@ -52,7 +53,8 @@ get_by_id("dispositivos", 1)
 
 ## 3. POST: Crear un nuevo recurso  
 
-```python
+```python  
+
 def create_resource(endpoint, data):
     url = BASE_URL.format(endpoint=endpoint)
     response = requests.post(url, json=data, headers=HEADERS)
@@ -72,7 +74,8 @@ create_resource("dispositivos", nuevo_dispositivo)
 ```  
 
 ## 4. PUT: Actualizar un recurso por ID
-```python
+```python  
+
 def update_resource(endpoint, resource_id, data):
     url = f"{BASE_URL.format(endpoint=endpoint)}{resource_id}"
     response = requests.put(url, json=data, headers=HEADERS)
@@ -93,7 +96,8 @@ update_resource("dispositivos", 1, dispositivo_actualizado)
 ```  
 
 ## 5. DELETE: Eliminar un recurso por ID
-```python
+```python  
+
 def delete_resource(endpoint, resource_id):
     url = f"{BASE_URL.format(endpoint=endpoint)}{resource_id}"
     response = requests.delete(url, headers=HEADERS)
