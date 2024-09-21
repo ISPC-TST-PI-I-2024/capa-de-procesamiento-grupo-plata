@@ -8,8 +8,8 @@ def get_db_connection():
     if 'db' not in g:
         g.db = mysql.connector.connect(
             host="gonaiot.com", 
-            user="root",   
-            password="root",  
+            user="plata",   
+            password="plata",  
             database="my_api_restful"            
         )
     return g.db
