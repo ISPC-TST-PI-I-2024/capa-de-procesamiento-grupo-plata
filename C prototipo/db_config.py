@@ -1,39 +1,31 @@
-import mysql.connector
-from flask import Flask, g
+import requests
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-# Función para obtener la conexión a la base de datos
-def get_db_connection():
-    if 'db' not in g:
-        g.db = mysql.connector.connect(
-            host="gonaiot.com", 
-            user="root",   
-            password="root",  
-            database="my_api_restful"            
-        )
-    return g.db
+# Variables de conexión a la API
+BASE_URL = "https://api.gonaiot.com/plata/datos_dispositivos/"
+API_KEY = "plata"
 
-# Función para cerrar la conexión a la base de datos
-def close_db_connection(e=None):
-    db = g.pop('db', None)
-    if db is not None:
-        db.close()
+# Ruta para obtener datos desde la API
+@app.route('/obtener_datos_dispositivos')
+def obtener_datos_dispositivos():
+    headers = {
+        'Authorization': f'Bearer {API_KEY}'  # Si la API usa este formato de autenticación
+    }
+    response = requests.get(BASE_URL, headers=headers)
 
-# Ruta para probar la conexión a la base de datos
-@app.route('/prueba_conexion')
-def prueba_conexion():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('SELECT DATABASE();')
-    db_name = cursor.fetchone()
-    close_db_connection()  
-    return f'Conectado a la base de datos: {db_name[0]}'
+    if response.status_code == 200:
+        data = response.json()  # Suponiendo que la API responde con JSON
+        return jsonify(data)
+    else:
+        return f"Error al conectar con la API: {response.status_code}", response.status_code
 
-# Asegurarse de cerrar la conexión al final de cada solicitud
+# Asegurarse de cerrar la conexión al final de cada solicitud (si se requiere cleanup en otros casos)
 @app.teardown_appcontext
 def teardown_db(exception):
-    close_db_connection()
+    pass  # Puedes realizar limpieza adicional aquí si lo necesitas
 
 if __name__ == '__main__':
     app.run(debug=True)
+
