@@ -117,11 +117,20 @@
             </tr>
             <tr>
               <td> Paola Pantoja </td>
-              <td> - </td>
+              <td> PaolaaPantoja </td>
               <td>
                 <a href="https://github.com/PaolaaPantoja">
                   <img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
-                </a>
+                   </a>
+              </td>
+            </tr>
+            <tr>
+              <td> Emma Gutiérrez </td>
+              <td> Emma Gutiérrez </td>
+              <td>
+                <a href="https://github.com/">
+                  <img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> 
+                  </a>
               </td>
             </tr>
         </table>
