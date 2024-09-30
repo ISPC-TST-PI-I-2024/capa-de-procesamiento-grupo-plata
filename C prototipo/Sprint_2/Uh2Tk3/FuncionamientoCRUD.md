@@ -1,7 +1,8 @@
 ![caratula](../../../E%20assets/caratula_princ.jfif)  
 
-## Actividad 2: Crear la clase SensorDataAPI para el envío de datos
-Diseño de la clase SensorDataAPI
+## Actividad:Crear la clase SensorDataAPI para el envío de datos
+Diseño de la clase SensorDataAPI  
+
 La clase SensorDataAPI se encargará de:
 
 Gestionar la conexión WiFi.
@@ -436,7 +437,7 @@ void loop() {
     triggerAPI ++;
 }  
 ```
-## Explicación del Código
+## Explicación de las modificaciones agregadas al Código
 * **Instancia de `SensorDataAPI`**: Se crea un objeto sensorAPI con las credenciales WiFi, la URL de la API y la clave de la API.  
 
 * **Conexión WiFi**: En el setup(), se conecta a la red WiFi y sincroniza la hora usando el servidor NTP.    
