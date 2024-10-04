@@ -11,17 +11,24 @@ class SensorDataAPI {
     const char* password;
     const char* apiEndpoint;
     const char* apiKey;
+    const char* loginEndpoint;
+    const char* username;
+    const char* userPassword;
+    String jwtToken;  // Almacenar el token JWT
     const char* ntpServer = "pool.ntp.org";
     const long gmtOffset_sec = -3;  // Ajusta según tu zona horaria
     const int daylightOffset_sec = 0;
 
   public:
     // Constructor para inicializar las credenciales WiFi y la API
-    SensorDataAPI(const char* ssid, const char* password, const char* apiEndpoint, const char* apiKey) {
+    SensorDataAPI(const char* ssid, const char* password, const char* apiEndpoint, const char* loginEndpoint, const char* apiKey, const char* username, const char* userPassword) {
       this->ssid = ssid;
       this->password = password;
       this->apiEndpoint = apiEndpoint;
+      this->loginEndpoint = loginEndpoint;
       this->apiKey = apiKey;
+      this->username = username;
+      this->userPassword = userPassword;
     }
 
     // Método para conectar a la red WiFi
@@ -39,6 +46,46 @@ class SensorDataAPI {
       delay(2000);  // Esperar unos segundos para sincronizar el tiempo
     }
 
+    // Método para obtener el token JWT
+    bool getAuthToken() {
+      if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+        http.begin(loginEndpoint);
+        http.addHeader("Content-Type", "application/json");
+        // Establecer timeout de 30 segundos
+        http.setTimeout(30000); 
+
+        String postData = "{\"username\": \"" + String(username) + "\", \"password\": \"" + String(userPassword) + "\"}";
+
+        int httpResponseCode = http.POST(postData);
+
+        if (httpResponseCode == 200) {
+          String response = http.getString();
+          Serial.print("Respuesta POST (HTTP ");
+          Serial.print(httpResponseCode);
+          Serial.println("):");
+          Serial.println(response);
+
+          // Extraer el token del JSON de respuesta
+          int tokenStart = response.indexOf("access_token\":\"") + 15;
+          int tokenEnd = response.indexOf("\"", tokenStart);
+          jwtToken = response.substring(tokenStart, tokenEnd);
+          
+          http.end();
+          return true;
+        } else {
+          Serial.print("Error en la solicitud de token: ");
+          Serial.println(httpResponseCode);
+
+          http.end();
+          return false;
+        }
+      } else {
+        Serial.println("Error: No hay conexión WiFi");
+        return false;
+      }
+    }
+
     // Método para obtener el timestamp actual
     String getTimestamp() {
       struct tm timeinfo;
@@ -52,49 +99,41 @@ class SensorDataAPI {
       return String(timeStringBuff);
     }
 
-    // Método para enviar los datos a la API RESTful
+    // Método para enviar los datos a través del middleware
     void sendData(float temperature, float humidity, float pressure, float gasConcentration, int id_dispositivo) {
-      if (WiFi.status() == WL_CONNECTED) {
+      if (WiFi.status() == WL_CONNECTED && !jwtToken.isEmpty()) {
         HTTPClient http;
 
         // Configuración de la URL
         http.begin(apiEndpoint);
-
+       
         // Headers
         http.addHeader("Content-Type", "application/json");
+        http.addHeader("Authorization", "Bearer " + jwtToken);
         http.addHeader("X-API-KEY", apiKey);
+
+        // Establecer timeout de 30 segundos
+        http.setTimeout(30000);  
 
         // Obtener el timestamp actual
         String timestamp = getTimestamp();
 
-        // Enviar las solicitudes POST con el mismo timestamp para cada sensor
-        String postDataTemp = "{\"id_dispositivo\": " + String(id_dispositivo) +
-                              ", \"fecha_recoleccion\": \"" + timestamp + 
-                              "\", \"valor\": " + String(temperature) + 
-                              ", \"unidad\": \"Celsius\"}";
-        sendRequest(postDataTemp, http);
+        // Crear el JSON con todas las mediciones en una sola solicitud
+        String postData = "{\"id_dispositivo\": " + String(id_dispositivo) +
+                          ", \"fecha_recoleccion\": \"" + timestamp + 
+                          "\", \"mediciones\": ["
+                          "{\"valor\": " + String(temperature) + ", \"unidad\": \"Celsius\"}, "
+                          "{\"valor\": " + String(humidity) + ", \"unidad\": \"%\"}, "
+                          "{\"valor\": " + String(pressure) + ", \"unidad\": \"hPa\"}, "
+                          "{\"valor\": " + String(gasConcentration) + ", \"unidad\": \"PPM\"}"
+                          "]}";
 
-        String postDataHumidity = "{\"id_dispositivo\": " + String(id_dispositivo) +
-                                  ", \"fecha_recoleccion\": \"" + timestamp + 
-                                  "\", \"valor\": " + String(humidity) + 
-                                  ", \"unidad\": \"%\"}";
-        sendRequest(postDataHumidity, http);
-
-        String postDataPressure = "{\"id_dispositivo\": " + String(id_dispositivo) +
-                                  ", \"fecha_recoleccion\": \"" + timestamp + 
-                                  "\", \"valor\": " + String(pressure) + 
-                                  ", \"unidad\": \"hPa\"}";
-        sendRequest(postDataPressure, http);
-
-        String postDataGas = "{\"id_dispositivo\": " + String(id_dispositivo) +
-                             ", \"fecha_recoleccion\": \"" + timestamp + 
-                             "\", \"valor\": " + String(gasConcentration) + 
-                             ", \"unidad\": \"PPM\"}";
-        sendRequest(postDataGas, http);
+        // Enviar la solicitud POST
+        sendRequest(postData, http);
 
         http.end();  // Cerrar la conexión HTTP
       } else {
-        Serial.println("Error: No hay conexión WiFi");
+        Serial.println("Error: No hay conexión WiFi o no se ha obtenido el token JWT");
       }
     }
 
