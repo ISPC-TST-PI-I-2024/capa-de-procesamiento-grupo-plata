@@ -12,10 +12,10 @@
 #include "time.h"
 
 // Credenciales WiFi y API
-const char* ssid = "Fibertel WiFi032 2.4GHz";
-const char* password = "vuelalto67";
-const char* apiEndpoint = "http://172.22.0.1/data";  // Cambia según tu configuración
-const char* loginEndpoint = "http://172.22.0.1/login";  // Ruta para obtener el token JWT
+const char* ssid = "Fibertel WiFi986 2.4GHz-2.4GHz"; //"Fibertel WiFi032 2.4GHz"
+const char* password = "00434990126"; //"vuelalto67"
+const char* apiEndpoint = "http://192.168.0.67/data";  // Cambia según tu configuración
+const char* loginEndpoint = "http://192.168.0.67/login";  // Ruta para obtener el token JWT
 const char* apiKey = "plata";
 const char* username = "admin";  // Cambia según tu usuario
 const char* userPassword = "password";  // Cambia según tu contraseña
