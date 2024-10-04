@@ -14,8 +14,11 @@
 // Credenciales WiFi y API
 const char* ssid = "Fibertel WiFi032 2.4GHz";
 const char* password = "vuelalto67";
-const char* apiEndpoint = "https://api.gonaiot.com/plata/datos_dispositivos/";
+const char* apiEndpoint = "http://172.22.0.1/data";  // Cambia según tu configuración
+const char* loginEndpoint = "http://172.22.0.1/login";  // Ruta para obtener el token JWT
 const char* apiKey = "plata";
+const char* username = "admin";  // Cambia según tu usuario
+const char* userPassword = "password";  // Cambia según tu contraseña
 const int id_disp = 6;
 
 // --------------------- Configuración de Pines ---------------------
@@ -41,7 +44,7 @@ const int numMenus = 3;
 int triggerAPI = 0;
 
 // Instancia de la clase SensorDataAPI
-SensorDataAPI sensorAPI(ssid, password, apiEndpoint, apiKey);
+SensorDataAPI sensorAPI(ssid, password, apiEndpoint, loginEndpoint, apiKey, username, userPassword);
 
 // --------------------- Configuración Inicial ---------------------
 void setup() {
@@ -49,7 +52,12 @@ void setup() {
     while (!Serial);
     // Conectar a la red WiFi
     sensorAPI.connectWiFi();
-    
+
+    // Obtener el token JWT
+    if (!sensorAPI.getAuthToken()) {
+        Serial.println("Error al obtener el token JWT, reiniciando...");
+        ESP.restart();  // Reiniciar si no se puede obtener el token
+    }
     Wire.begin();
     
     // Inicializar sensores y perifericos
