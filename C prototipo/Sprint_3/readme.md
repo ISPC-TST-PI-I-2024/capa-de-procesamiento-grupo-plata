@@ -1,3 +1,4 @@
+```lua
 middleware_project/
 |-- app/
 |   |-- __init__.py           # Inicializa la app Flask y JWT
@@ -12,3 +13,4 @@ middleware_project/
 |   |-- test_routes.py        # Pruebas automatizadas con pytest
 |-- docs/
 |   |-- funcMiddleware.md      # Documentación sobre el middleware
+```
