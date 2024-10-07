@@ -221,7 +221,7 @@ Este proyecto espera lograr:
 La **Capa de Procesamiento** en este proyecto a nivel ciudad es clave para manejar la recolección y el análisis de grandes volúmenes de datos provenientes de múltiples sensores distribuidos en distintas zonas urbanas. Al implementar un middleware robusto y optimizar la infraestructura cloud, se garantiza que el sistema pueda escalar y procesar los datos en tiempo real, ayudando a mejorar la calidad del aire y el bienestar de los ciudadanos.  
 En la carpeta presentacion, se puede observar el video de conclusion del proyecto con la implementacion de un middleware y su integracion con los dispositivos Edge.  
  
-[PRESENTACION]("https://youtu.be/BGp8i9cMFSQ")
+[PRESENTACION](https://youtu.be/BGp8i9cMFSQ)
 
 ## Licencia
 
