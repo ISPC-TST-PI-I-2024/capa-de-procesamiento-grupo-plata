@@ -1,0 +1,39 @@
+import mysql.connector
+from flask import Flask, g
+
+app = Flask(__name__)
+
+# Función para obtener la conexión a la base de datos
+def get_db_connection():
+    if 'db' not in g:
+        g.db = mysql.connector.connect(
+            host="localhost", 
+            user="root",   
+            password="root",  
+            database="my_api_restful"            
+        )
+    return g.db
+
+# Función para cerrar la conexión a la base de datos
+def close_db_connection(e=None):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
+
+# Ruta para probar la conexión a la base de datos
+@app.route('/prueba_conexion')
+def prueba_conexion():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT DATABASE();')
+    db_name = cursor.fetchone()
+    close_db_connection()  
+    return f'Conectado a la base de datos: {db_name[0]}'
+
+# Asegurarse de cerrar la conexión al final de cada solicitud
+@app.teardown_appcontext
+def teardown_db(exception):
+    close_db_connection()
+
+if __name__ == '__main__':
+    app.run(debug=True)

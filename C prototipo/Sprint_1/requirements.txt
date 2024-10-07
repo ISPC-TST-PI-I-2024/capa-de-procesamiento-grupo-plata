@@ -1,0 +1,11 @@
+## ETAPA 1 ##
+
+Flask
+mysql-connector-python
+
+
+## ETAPA 2 ##
+
+Flask-SQLAlchemy
+Flask
+flask-restful
