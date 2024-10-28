@@ -12,11 +12,18 @@
 #include "time.h"
 
 // Credenciales WiFi y API
-const char* ssid = "Fibertel WiFi032 2.4GHz";
-const char* password = "vuelalto67";
-const char* apiEndpoint = "https://api.gonaiot.com/plata/datos_dispositivos/";
+const char* ssid = /*"Fibertel WiFi986 2.4";*/ "Fibertel WiFi032 2.4GHz";
+const char* password = /*"00434990126"; */"vuelalto67";
+const char* apiEndpoint = "http://192.168.0.67/data";  // Cambia según tu configuración
+const char* loginEndpoint = "http://192.168.0.67/login";  // Ruta para obtener el token JWT
 const char* apiKey = "plata";
+<<<<<<< HEAD
 const int id_disp = 2;
+=======
+const char* username = "admin";  // Cambia según tu usuario
+const char* userPassword = "password";  // Cambia según tu contraseña
+const int id_disp = 6;
+>>>>>>> 20ffb94f366d1ea784168b9e1f705d86e873fa3b
 
 // --------------------- Configuración de Pines ---------------------
 #define MQ135_PIN 34 // GPIO34 (ADC1_CH6)
@@ -41,7 +48,7 @@ const int numMenus = 3;
 int triggerAPI = 0;
 
 // Instancia de la clase SensorDataAPI
-SensorDataAPI sensorAPI(ssid, password, apiEndpoint, apiKey);
+SensorDataAPI sensorAPI(ssid, password, apiEndpoint, loginEndpoint, apiKey, username, userPassword);
 
 // --------------------- Configuración Inicial ---------------------
 void setup() {
@@ -49,7 +56,12 @@ void setup() {
     while (!Serial);
     // Conectar a la red WiFi
     sensorAPI.connectWiFi();
-    
+
+    // Obtener el token JWT
+    if (!sensorAPI.getAuthToken()) {
+        Serial.println("Error al obtener el token JWT, reiniciando...");
+        ESP.restart();  // Reiniciar si no se puede obtener el token
+    }
     Wire.begin();
     
     // Inicializar sensores y perifericos
