@@ -16,7 +16,7 @@ const char* ssid = "Fibertel WiFi032 2.4GHz";
 const char* password = "vuelalto67";
 const char* apiEndpoint = "https://api.gonaiot.com/plata/datos_dispositivos/";
 const char* apiKey = "plata";
-const int id_disp = 6;
+const int id_disp = 2;
 
 // --------------------- Configuración de Pines ---------------------
 #define MQ135_PIN 34 // GPIO34 (ADC1_CH6)
