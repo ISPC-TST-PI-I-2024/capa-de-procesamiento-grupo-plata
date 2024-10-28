@@ -1,0 +1,57 @@
+{
+    "usuarios": [
+      {
+        "id": 1,
+        "nombre": "Juan Perez",
+        "email": "juan.perez@example.com",
+        "rol": "admin",
+        "password": "password123"
+      }
+    ],
+    "dispositivos": [
+      {
+        "id": 1,
+        "nombre": "Estation_1",
+        "tipo": "Nodo medicion calidad aire",
+        "ubicacion": "31°26'46.9\"S 64°10'28.8\"W",
+        "id_usuario": 1
+      }
+    ],
+    "datos_dispositivos": [
+      {
+        "id": 1,
+        "dispositivo_id": 1,
+        "timestamp": "2024-06-24T00:00:00Z",
+        "valor": 23.5,
+        "unidad": "C"
+      }
+    ],
+    "configuraciones": [
+      {
+        "id_configuracion": 1,
+        "id_dispositivo": 1,
+        "parametro": "intervalo_muestreo",
+        "valor": "10s"
+      }
+    ],
+    "proyectos": [
+      {
+        "id_proyecto": 1,
+        "nombre": "Proyecto IoT",
+        "descripcion": "Medicion de calidad del aire",
+        "id_usuario": 1,
+        "fecha_inicio": "2024-01-01",
+        "fecha_fin": "2024-12-31"
+      }
+    ],
+    "seguridad": [
+      {
+        "id_seguridad": 1,
+        "id_usuario": 1,
+        "id_dispositivo": 1,
+        "permisos": "admin"
+      }
+    ]
+  }
+  
+  
